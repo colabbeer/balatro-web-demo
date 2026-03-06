@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小丑牌</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">INSPIRED BY BALATRO</p>
+        <h1>小丑牌</h1>
+        <p class="subtitle">围绕 Blind、牌型升级和小丑构筑来堆叠分数，更接近手机端 Balatro 的回合节奏。</p>
+      </div>
+      <div class="hero-strip">
+        <div class="hero-stat">
+          <span>总分</span>
+          <strong id="total-score">0</strong>
+        </div>
+        <div class="hero-stat">
+          <span>金币</span>
+          <strong id="money">4</strong>
+        </div>
+        <div class="hero-stat">
+          <span>底注</span>
+          <strong id="ante-level">1</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel side-panel">
+        <section class="blind-panel">
+          <div class="section-header">
+            <div class="panel-title">当前 Blind</div>
+            <span id="blind-tag" class="blind-tag">SMALL BLIND</span>
+          </div>
+          <div class="blind-card">
+            <strong id="blind-name">Small Blind</strong>
+            <p id="blind-desc">无特殊效果。</p>
+            <div class="blind-metrics">
+              <div class="metric-card">
+                <span>目标分</span>
+                <strong id="target-score">0</strong>
+              </div>
+              <div class="metric-card">
+                <span>奖励</span>
+                <strong id="blind-reward">0</strong>
+              </div>
+              <div class="metric-card">
+                <span>剩余出牌</span>
+                <strong id="hands-left">0</strong>
+              </div>
+              <div class="metric-card">
+                <span>剩余弃牌</span>
+                <strong id="discards-left">0</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="preview-panel">
+          <div class="panel-title">出牌预估</div>
+          <div class="result-card">
+            <div class="hand-preview-cell">
+              <span>牌型</span>
+              <div class="hand-preview-title">
+                <strong id="preview-hand">未选择</strong>
+                <button id="hand-level-trigger" class="info-trigger" type="button" aria-label="查看牌型等级说明">i</button>
+              </div>
+              <div id="hand-level-popover" class="hand-level-popover" tabindex="0">
+                <div class="popover-title" id="hand-level-name">未选择</div>
+                <div class="popover-copy" id="hand-level-detail">选择牌后会显示当前牌型等级。</div>
+              </div>
+            </div>
+            <div>
+              <span>筹码</span>
+              <strong id="preview-chips">0</strong>
+            </div>
+            <div>
+              <span>倍率</span>
+              <strong id="preview-mult">x0</strong>
+            </div>
+            <div class="final-score">
+              <span>预估得分</span>
+              <strong id="preview-score">0</strong>
+            </div>
+          </div>
+          <div id="preview-notes" class="preview-notes">选择牌后会显示小丑与 Blind 修正。</div>
+        </section>
+
+        <section>
+          <div class="panel-title">操作</div>
+          <div class="actions">
+            <button id="play-button" class="primary">出牌</button>
+            <button id="discard-button" class="secondary">弃牌</button>
+            <button id="sort-rank-button" class="secondary">按点数排序</button>
+            <button id="sort-suit-button" class="secondary">按花色排序</button>
+            <button id="reset-button" class="ghost">重新开始</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="board">
+        <div class="panel board-panel">
+          <div class="board-header">
+            <div>
+              <div class="panel-title">手牌</div>
+              <p class="board-copy">每回合最多选择 5 张牌。Balatro 式打法里，先看预估再决定是否弃牌。</p>
+            </div>
+            <div class="hand-meta">
+              <div>已选 <strong id="selected-count">0</strong> / 5</div>
+              <div>牌堆 <strong id="deck-left">0</strong></div>
+              <div>回合分 <strong id="round-score">0</strong></div>
+            </div>
+          </div>
+          <div id="hand" class="hand"></div>
+        </div>
+
+        <div class="panel jokers-panel">
+          <div class="section-header">
+            <div class="panel-title">小丑槽</div>
+            <span class="hint">最多 5 张</span>
+          </div>
+          <div id="joker-list" class="joker-list"></div>
+        </div>
+
+        <div id="shop-panel" class="panel shop-panel hidden">
+          <div class="board-header">
+            <div>
+              <div class="panel-title">商店</div>
+              <p class="board-copy">过关后进入商店。你可以购买小丑或刷新货架，然后挑战下一个 Blind。</p>
+            </div>
+            <div class="shop-actions">
+              <button id="reroll-button" class="secondary">刷新商店 -1</button>
+              <button id="next-round-button" class="primary">挑战下一 Blind</button>
+            </div>
+          </div>
+          <div id="shop-list" class="shop-list"></div>
+        </div>
+      </section>
+
+      <aside class="panel log-panel">
+        <div class="section-header">
+          <div class="panel-title">战报</div>
+          <span id="phase-label" class="hint">RUN ACTIVE</span>
+        </div>
+        <div id="last-hand-panel" class="last-hand-panel">
+          <span>上次结算</span>
+          <strong id="last-hand-name">未出牌</strong>
+          <div class="last-hand-score">
+            <span id="last-chips">0</span>
+            <span>×</span>
+            <span id="last-mult">0</span>
+            <span>=</span>
+            <strong id="last-score">0</strong>
+          </div>
+        </div>
+        <div id="log" class="log"></div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
