@@ -663,7 +663,7 @@ body::before {
 }
 
 .stage-shop-list {
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, minmax(110px, 1fr));
 }
 
 .hand-stage {
@@ -974,20 +974,29 @@ body::before {
 
 .joker-card,
 .shop-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   overflow: hidden;
   border: 0;
   background: transparent;
 }
 
+.top-joker-list .joker-card,
+.top-joker-list .shop-card {
+  gap: 0;
+}
+
 .top-joker-list .special-frame {
-  min-height: 164px;
+  min-height: 148px;
 }
 
 .special-frame {
   position: relative;
   height: 100%;
-  min-height: 220px;
-  padding: 12px;
+  min-height: 0;
+  aspect-ratio: 29 / 40;
+  padding: 10px;
   border: 4px solid rgba(255, 255, 255, 0.74);
   border-radius: 18px;
   background:
@@ -999,13 +1008,13 @@ body::before {
 
 .special-frame h3 {
   margin: 0 0 6px;
-  font-size: 24px;
+  font-size: 21px;
 }
 
 .special-frame p {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.35;
   color: #2d3b44;
 }
 
@@ -1064,10 +1073,10 @@ body::before {
 .special-art {
   display: grid;
   place-items: center;
-  height: 84px;
-  margin: 10px 0;
+  height: 64px;
+  margin: 8px 0;
   border-radius: 16px;
-  font-size: 52px;
+  font-size: 42px;
   font-weight: 900;
   background:
     radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.3), transparent 48%),
@@ -1097,6 +1106,12 @@ body::before {
 .shop-card button {
   width: 100%;
   margin-top: 10px;
+}
+
+.shop-buy-button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .hidden {
@@ -1291,16 +1306,15 @@ body::before {
   }
 
   .top-joker-list .special-frame {
-    min-height: 138px;
+    min-height: 126px;
   }
 
   .special-frame {
-    min-height: 176px;
-    padding: 10px;
+    padding: 9px;
   }
 
   .special-frame h3 {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .special-frame p {
@@ -1384,16 +1398,16 @@ body::before {
   }
 
   .top-joker-list .special-frame {
-    min-height: 120px;
+    min-height: 108px;
   }
 
   .special-frame {
-    min-height: 152px;
+    padding: 8px;
   }
 
   .special-art {
-    height: 52px;
-    font-size: 32px;
+    height: 46px;
+    font-size: 30px;
   }
 
   .log-entry:nth-child(n + 5) {
@@ -1528,15 +1542,15 @@ body::before {
   }
 
   .top-joker-list .special-frame {
-    min-height: 132px;
+    min-height: 116px;
   }
 
   .special-frame {
-    padding: 10px;
+    padding: 9px;
   }
 
   .special-frame h3 {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .special-frame p {
@@ -1544,8 +1558,8 @@ body::before {
   }
 
   .special-art {
-    height: 60px;
-    font-size: 36px;
+    height: 50px;
+    font-size: 30px;
   }
 
   .consumable-card {

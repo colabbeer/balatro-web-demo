@@ -589,7 +589,9 @@ function renderShop() {
       </div>
     `;
     const button = document.createElement("button");
-    button.className = affordable && hasSpace ? "primary" : "secondary";
+    button.className = affordable && hasSpace
+      ? "rail-button rail-button-yellow small shop-buy-button"
+      : "rail-button rail-button-dark small shop-buy-button";
     button.disabled = !affordable || !hasSpace;
     button.textContent = hasSpace ? (affordable ? "购买" : "金币不足") : "小丑槽已满";
     button.addEventListener("click", () => buyJoker(joker.id));
