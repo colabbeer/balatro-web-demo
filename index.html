@@ -6,160 +6,207 @@
   <title>小丑牌</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-scene="run">
+  <div class="rotate-overlay">
+    <div class="rotate-card">
+      <div class="rotate-icon">↺</div>
+      <strong>请横屏游玩</strong>
+      <p>这个 demo 针对手机横屏布局设计，旋转设备后体验会更接近原作。</p>
+    </div>
+  </div>
   <div class="app-shell">
-    <header class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">INSPIRED BY BALATRO</p>
-        <h1>小丑牌</h1>
-        <p class="subtitle">围绕 Blind、牌型升级和小丑构筑来堆叠分数，更接近手机端 Balatro 的回合节奏。</p>
-      </div>
-      <div class="hero-strip">
-        <div class="hero-stat">
-          <span>总分</span>
-          <strong id="total-score">0</strong>
-        </div>
-        <div class="hero-stat">
-          <span>金币</span>
-          <strong id="money">4</strong>
-        </div>
-        <div class="hero-stat">
-          <span>底注</span>
-          <strong id="ante-level">1</strong>
-        </div>
-      </div>
-    </header>
-
-    <main class="layout">
-      <aside class="panel side-panel">
-        <section class="blind-panel">
-          <div class="section-header">
-            <div class="panel-title">当前 Blind</div>
-            <span id="blind-tag" class="blind-tag">SMALL BLIND</span>
-          </div>
-          <div class="blind-card">
-            <strong id="blind-name">Small Blind</strong>
-            <p id="blind-desc">无特殊效果。</p>
-            <div class="blind-metrics">
-              <div class="metric-card">
-                <span>目标分</span>
-                <strong id="target-score">0</strong>
-              </div>
-              <div class="metric-card">
-                <span>奖励</span>
-                <strong id="blind-reward">0</strong>
-              </div>
-              <div class="metric-card">
-                <span>剩余出牌</span>
-                <strong id="hands-left">0</strong>
-              </div>
-              <div class="metric-card">
-                <span>剩余弃牌</span>
-                <strong id="discards-left">0</strong>
-              </div>
-            </div>
+    <main class="game-layout">
+      <aside class="rail">
+        <section class="rail-card marquee-card">
+          <div class="marquee-frame">
+            <div class="marquee-title">小丑牌</div>
+            <div class="marquee-copy">INSPIRED BY BALATRO</div>
           </div>
         </section>
 
-        <section class="preview-panel">
-          <div class="panel-title">出牌预估</div>
-          <div class="result-card">
-            <div class="hand-preview-cell">
-              <span>牌型</span>
-              <div class="hand-preview-title">
-                <strong id="preview-hand">未选择</strong>
-                <button id="hand-level-trigger" class="info-trigger" type="button" aria-label="查看牌型等级说明">i</button>
-              </div>
-              <div id="hand-level-popover" class="hand-level-popover" tabindex="0">
-                <div class="popover-title" id="hand-level-name">未选择</div>
-                <div class="popover-copy" id="hand-level-detail">选择牌后会显示当前牌型等级。</div>
-              </div>
-            </div>
-            <div>
+        <section class="rail-card score-card">
+          <div class="score-row">
+            <span>回合分数</span>
+            <strong id="round-score">0</strong>
+          </div>
+          <div class="meter-card">
+            <div class="meter-chip">
               <span>筹码</span>
               <strong id="preview-chips">0</strong>
             </div>
-            <div>
+            <div class="meter-cross">×</div>
+            <div class="meter-mult">
               <span>倍率</span>
               <strong id="preview-mult">x0</strong>
             </div>
-            <div class="final-score">
-              <span>预估得分</span>
-              <strong id="preview-score">0</strong>
+          </div>
+          <div class="score-meta">
+            <div class="score-pill">
+              <span>总分</span>
+              <strong id="total-score">0</strong>
+            </div>
+            <div class="score-pill">
+              <span>金币</span>
+              <strong id="money">4</strong>
             </div>
           </div>
-          <div id="preview-notes" class="preview-notes">选择牌后会显示小丑与 Blind 修正。</div>
         </section>
 
-        <section>
-          <div class="panel-title">操作</div>
-          <div class="actions">
-            <button id="play-button" class="primary">出牌</button>
-            <button id="discard-button" class="secondary">弃牌</button>
-            <button id="sort-rank-button" class="secondary">按点数排序</button>
-            <button id="sort-suit-button" class="secondary">按花色排序</button>
-            <button id="reset-button" class="ghost">重新开始</button>
+        <section class="rail-actions">
+          <button id="play-button" class="rail-button rail-button-red">出牌</button>
+          <div class="action-pair">
+            <button id="discard-button" class="rail-button rail-button-dark">弃牌</button>
+            <button id="reset-button" class="rail-button rail-button-yellow">重开</button>
+          </div>
+          <div class="action-pair small-pair">
+            <button id="sort-rank-button" class="rail-button rail-button-dark small">点数</button>
+            <button id="sort-suit-button" class="rail-button rail-button-dark small">花色</button>
+          </div>
+        </section>
+
+        <section class="rail-meta-grid">
+          <div class="meta-box">
+            <span>出牌</span>
+            <strong id="hands-left">0</strong>
+          </div>
+          <div class="meta-box">
+            <span>弃牌</span>
+            <strong id="discards-left">0</strong>
+          </div>
+          <div class="meta-box money-box">
+            <span>现金</span>
+            <strong id="money-duplicate">$4</strong>
+          </div>
+          <div class="meta-box">
+            <span>底注</span>
+            <strong id="ante-level">1</strong>
+          </div>
+          <div class="meta-box">
+            <span>牌堆</span>
+            <strong id="deck-left">0</strong>
+          </div>
+          <div class="meta-box">
+            <span>已选</span>
+            <strong id="selected-count">0/5</strong>
           </div>
         </section>
       </aside>
 
-      <section class="board">
-        <div class="panel board-panel">
-          <div class="board-header">
-            <div>
-              <div class="panel-title">手牌</div>
-              <p class="board-copy">每回合最多选择 5 张牌。Balatro 式打法里，先看预估再决定是否弃牌。</p>
-            </div>
-            <div class="hand-meta">
-              <div>已选 <strong id="selected-count">0</strong> / 5</div>
-              <div>牌堆 <strong id="deck-left">0</strong></div>
-              <div>回合分 <strong id="round-score">0</strong></div>
+      <section class="table-stage">
+        <header class="top-tray">
+          <div class="tray-block">
+            <div class="tray-label">小丑牌</div>
+            <div id="joker-list" class="joker-list top-joker-list"></div>
+          </div>
+          <div class="tray-block compact">
+            <div class="tray-label">消耗牌</div>
+            <div class="consumable-strip">
+              <div class="consumable-card">VI</div>
+              <div class="consumable-card">XVII</div>
             </div>
           </div>
-          <div id="hand" class="hand"></div>
-        </div>
+        </header>
 
-        <div class="panel jokers-panel">
-          <div class="section-header">
-            <div class="panel-title">小丑槽</div>
-            <span class="hint">最多 5 张</span>
-          </div>
-          <div id="joker-list" class="joker-list"></div>
-        </div>
+        <section class="center-stage">
+          <div class="table-backdrop"></div>
 
-        <div id="shop-panel" class="panel shop-panel hidden">
-          <div class="board-header">
-            <div>
-              <div class="panel-title">商店</div>
-              <p class="board-copy">过关后进入商店。你可以购买小丑或刷新货架，然后挑战下一个 Blind。</p>
+          <div class="stage-left rail-surface">
+            <div class="surface-heading">当前盲注</div>
+            <div class="blind-card main-blind">
+              <div class="blind-topline">
+                <span id="blind-tag" class="blind-tag">SMALL BLIND</span>
+                <span class="blind-chip">目标</span>
+              </div>
+              <strong id="blind-name">Small Blind</strong>
+              <p id="blind-desc">无特殊效果。</p>
+              <div class="blind-score-row">
+                <span>至少得分</span>
+                <strong id="target-score">0</strong>
+              </div>
+              <div class="blind-score-row reward-row">
+                <span>奖励</span>
+                <strong id="blind-reward">0</strong>
+              </div>
             </div>
-            <div class="shop-actions">
-              <button id="reroll-button" class="secondary">刷新商店 -1</button>
-              <button id="next-round-button" class="primary">挑战下一 Blind</button>
+
+            <div class="preview-panel compact-preview">
+              <div class="surface-heading">当前牌型</div>
+              <div class="result-card preview-card">
+                <div class="hand-preview-cell">
+                  <span>牌型</span>
+                  <div class="hand-preview-title">
+                    <strong id="preview-hand">未选择</strong>
+                    <button id="hand-level-trigger" class="info-trigger" type="button" aria-label="查看牌型等级说明">i</button>
+                  </div>
+                  <div id="hand-level-popover" class="hand-level-popover" tabindex="0">
+                    <div class="popover-title" id="hand-level-name">未选择</div>
+                    <div class="popover-copy" id="hand-level-detail">选择牌后会显示当前牌型等级。</div>
+                  </div>
+                </div>
+                <div class="final-score">
+                  <span>预估得分</span>
+                  <strong id="preview-score">0</strong>
+                </div>
+              </div>
+              <div id="preview-notes" class="preview-notes">选择牌后会显示小丑与 Blind 修正。</div>
             </div>
           </div>
-          <div id="shop-list" class="shop-list"></div>
-        </div>
+
+          <div class="stage-main">
+            <div class="stage-banner">
+              <div class="phase-chip" id="phase-label">RUN ACTIVE</div>
+              <div class="banner-copy">选择牌后出牌，构筑围绕小丑和牌型成长展开。</div>
+            </div>
+
+            <div id="shop-panel" class="shop-stage hidden">
+              <div class="shop-heading">
+                <div class="shop-sign">
+                  <span>SHOP</span>
+                  <small>来变强吧！</small>
+                </div>
+                <div class="shop-controls">
+                  <button id="reroll-button" class="rail-button rail-button-dark small">刷新商店 -1</button>
+                  <button id="next-round-button" class="rail-button rail-button-yellow">挑战下一盲注</button>
+                </div>
+              </div>
+              <div id="shop-list" class="shop-list stage-shop-list"></div>
+            </div>
+
+            <div class="hand-stage">
+              <div class="surface-heading">手牌区</div>
+              <div id="hand" class="hand fan-hand"></div>
+            </div>
+          </div>
+
+          <div class="stage-right rail-surface">
+            <div id="last-hand-panel" class="last-hand-panel">
+              <span>上次结算</span>
+              <strong id="last-hand-name">未出牌</strong>
+              <div class="last-hand-score">
+                <span id="last-chips">0</span>
+                <span>×</span>
+                <span id="last-mult">0</span>
+                <span>=</span>
+                <strong id="last-score">0</strong>
+              </div>
+            </div>
+
+            <div class="deck-stack">
+              <div class="deck-visual">
+                <div class="deck-card back"></div>
+                <div class="deck-card back offset-a"></div>
+                <div class="deck-card back offset-b"></div>
+              </div>
+              <div class="deck-count">剩余 <strong id="deck-left-duplicate">0</strong></div>
+            </div>
+
+            <div class="log-panel">
+              <div class="surface-heading">战报</div>
+              <div id="log" class="log"></div>
+            </div>
+          </div>
+        </section>
       </section>
-
-      <aside class="panel log-panel">
-        <div class="section-header">
-          <div class="panel-title">战报</div>
-          <span id="phase-label" class="hint">RUN ACTIVE</span>
-        </div>
-        <div id="last-hand-panel" class="last-hand-panel">
-          <span>上次结算</span>
-          <strong id="last-hand-name">未出牌</strong>
-          <div class="last-hand-score">
-            <span id="last-chips">0</span>
-            <span>×</span>
-            <span id="last-mult">0</span>
-            <span>=</span>
-            <strong id="last-score">0</strong>
-          </div>
-        </div>
-        <div id="log" class="log"></div>
-      </aside>
     </main>
   </div>
 

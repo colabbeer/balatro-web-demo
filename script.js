@@ -244,6 +244,7 @@ const jokerLibrary = [
 ];
 
 const ui = {
+  body: document.body,
   hand: document.querySelector("#hand"),
   jokerList: document.querySelector("#joker-list"),
   shopPanel: document.querySelector("#shop-panel"),
@@ -266,8 +267,10 @@ const ui = {
   handsLeft: document.querySelector("#hands-left"),
   discardsLeft: document.querySelector("#discards-left"),
   deckLeft: document.querySelector("#deck-left"),
+  deckLeftDuplicate: document.querySelector("#deck-left-duplicate"),
   anteLevel: document.querySelector("#ante-level"),
   money: document.querySelector("#money"),
+  moneyDuplicate: document.querySelector("#money-duplicate"),
   previewHand: document.querySelector("#preview-hand"),
   previewChips: document.querySelector("#preview-chips"),
   previewMult: document.querySelector("#preview-mult"),
@@ -596,7 +599,8 @@ function renderShop() {
 }
 
 function renderStats() {
-  ui.selectedCount.textContent = state.selected.size;
+  ui.body.dataset.scene = state.gameOver ? "gameover" : (state.roundActive ? "run" : "shop");
+  ui.selectedCount.textContent = `${state.selected.size}/5`;
   ui.totalScore.textContent = state.totalScore;
   ui.roundScore.textContent = state.roundScore;
   ui.targetScore.textContent = getTargetScore();
@@ -607,13 +611,15 @@ function renderStats() {
   ui.handsLeft.textContent = state.handsLeft;
   ui.discardsLeft.textContent = state.discardsLeft;
   ui.deckLeft.textContent = state.deck.length;
+  ui.deckLeftDuplicate.textContent = state.deck.length;
   ui.anteLevel.textContent = state.ante;
   ui.money.textContent = state.money;
+  ui.moneyDuplicate.textContent = `$${state.money}`;
   ui.lastHandName.textContent = state.lastResult.handName;
   ui.lastChips.textContent = state.lastResult.chips;
   ui.lastMult.textContent = state.lastResult.mult;
   ui.lastScore.textContent = state.lastResult.score;
-  ui.phaseLabel.textContent = state.gameOver ? "RUN OVER" : (state.roundActive ? "RUN ACTIVE" : "IN SHOP");
+  ui.phaseLabel.textContent = state.gameOver ? "游戏结束" : (state.roundActive ? "回合进行中" : "商店");
   ui.playButton.disabled = state.selected.size === 0 || !state.roundActive || state.gameOver;
   ui.playButton.disabled = ui.playButton.disabled || state.animating;
   ui.discardButton.disabled = state.selected.size === 0 || !state.roundActive || state.gameOver || state.discardsLeft <= 0 || state.animating;
@@ -992,6 +998,9 @@ function addLog(message, label) {
     <div>${message}</div>
   `;
   ui.log.prepend(entry);
+  while (ui.log.children.length > 5) {
+    ui.log.removeChild(ui.log.lastElementChild);
+  }
 }
 
 ui.playButton.addEventListener("click", playSelected);
