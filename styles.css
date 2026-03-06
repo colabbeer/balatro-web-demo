@@ -1638,7 +1638,289 @@ body::before {
   }
 }
 
-@media (max-width: 960px) and (orientation: portrait) {
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  .app-shell {
+    width: min(100vw - 6px, 100%);
+    height: calc(100vh - 6px);
+    margin: 3px auto;
+  }
+
+  .game-layout {
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .rail {
+    gap: 8px;
+    padding: 8px;
+    border-radius: 18px;
+  }
+
+  .marquee-frame {
+    padding: 10px 12px;
+  }
+
+  .marquee-title {
+    font-size: 24px;
+  }
+
+  .marquee-copy {
+    font-size: 12px;
+  }
+
+  .score-row strong {
+    font-size: 28px;
+  }
+
+  .meter-chip,
+  .meter-mult {
+    padding: 8px 10px;
+  }
+
+  .meter-chip strong,
+  .meter-mult strong {
+    font-size: 22px;
+  }
+
+  .score-pill,
+  .meta-box {
+    min-height: 54px;
+    padding: 8px 10px;
+  }
+
+  .score-pill strong,
+  .meta-box strong {
+    font-size: 16px;
+  }
+
+  .rail-button {
+    padding: 10px 8px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+
+  .rail-button.small {
+    font-size: 13px;
+  }
+
+  .top-tray {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    min-height: 104px;
+    overflow: hidden;
+  }
+
+  .tray-block {
+    min-width: 0;
+  }
+
+  .tray-block:first-child {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .tray-block:first-child::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tray-block.compact {
+    flex: 0 0 auto;
+    width: 116px;
+    gap: 6px;
+  }
+
+  .tray-label,
+  .surface-heading {
+    font-size: 14px;
+  }
+
+  .top-joker-list {
+    display: flex;
+    gap: 8px;
+    min-width: max-content;
+  }
+
+  .top-joker-list .joker-card {
+    width: 86px;
+    flex: 0 0 auto;
+  }
+
+  .top-joker-list .special-frame {
+    min-height: 86px;
+    padding: 6px;
+  }
+
+  .top-joker-list .special-frame h3,
+  .top-joker-list .special-frame p,
+  .top-joker-list .joker-badges,
+  .top-joker-list .special-ribbon {
+    display: none;
+  }
+
+  .top-joker-list .special-art {
+    height: 56px;
+    margin: 8px 0 0;
+    font-size: 32px;
+  }
+
+  .consumable-strip {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .consumable-card {
+    width: 54px;
+    height: 74px;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+
+  .center-stage {
+    grid-template-columns: 188px minmax(0, 1fr) 148px;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .rail-surface,
+  .shop-stage,
+  .hand-stage,
+  .log-panel,
+  .last-hand-panel,
+  .blind-card,
+  .stage-banner {
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .blind-card strong {
+    font-size: 22px;
+  }
+
+  .blind-card p,
+  .preview-notes,
+  .banner-copy {
+    font-size: 12px;
+  }
+
+  .blind-score-row {
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+  .blind-score-row strong {
+    font-size: 20px;
+  }
+
+  .hand {
+    min-height: 142px;
+    padding-top: 2px;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .card {
+    width: clamp(58px, calc((100% + 110px) / 8), 74px);
+    border-width: 3px;
+    border-radius: 12px;
+  }
+
+  .fan-hand .card {
+    margin-left: -18px;
+  }
+
+  .card-corner {
+    top: 6px;
+    left: 6px;
+    width: 18px;
+  }
+
+  .card-corner.bottom {
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .card-rank {
+    font-size: 18px;
+  }
+
+  .card-suit-mini {
+    font-size: 10px;
+  }
+
+  .card-center,
+  .ace-layout,
+  .face-layout,
+  .pip-layout {
+    inset: 24px 10px 22px;
+    border-radius: 10px;
+  }
+
+  .ace-suit {
+    font-size: 42px;
+  }
+
+  .face-glyph {
+    font-size: 34px;
+  }
+
+  .face-suit,
+  .pip {
+    font-size: 13px;
+  }
+
+  .card-chip {
+    left: 6px;
+    bottom: 6px;
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+
+  .last-hand-panel strong {
+    font-size: 18px;
+  }
+
+  .last-hand-score {
+    font-size: 14px;
+  }
+
+  .deck-visual {
+    width: 72px;
+    height: 98px;
+  }
+
+  .deck-count {
+    font-size: 14px;
+  }
+
+  .log-entry {
+    padding: 6px 8px;
+  }
+
+  .log-entry small,
+  .log-entry strong,
+  .log-entry div {
+    font-size: 11px;
+  }
+
+  .log-entry:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) and (hover: none) and (pointer: coarse) {
+  .rotate-overlay {
+    display: flex;
+  }
+
+  .app-shell {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) and (max-aspect-ratio: 10 / 13) {
   .rotate-overlay {
     display: flex;
   }
